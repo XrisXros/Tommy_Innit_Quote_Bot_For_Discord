@@ -8,7 +8,7 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 PREFIX = os.getenv("PREFIX")
 
-with open("Tommy_Innit\quotes.json") as json_file:
+with open("Tommy_Innit_Quote_Bot_For_Discord\quotes.json") as json_file:
     quotes = json.load(json_file)
 
 client = discord.Client()
@@ -29,7 +29,7 @@ async def on_message(message):
     command = args.pop(0).lower()
 
     if command == "random":
-        randomqgen = random.randint(0,7)
+        randomqgen = random.randint(0,8)
         file = discord.File("{filename}".format(filename = quotes["quotes"][randomqgen]["link"]), filename = quotes["quotes"][randomqgen]["link"])
         embed=discord.Embed(title="Quote:", description=quotes["quotes"][randomqgen]["quote"], color=0x7301af)
         embed.set_footer(text="do ^random for another! 🔥 ")
@@ -53,6 +53,7 @@ async def on_message(message):
         embed.add_field(name="No. 6 I'd really rather not", value="understandable", inline=False)
         embed.add_field(name="No. 7 27 emeralds for free", value="Profit anyone?", inline=False)
         embed.add_field(name="No. 8 Oh shh...", value="What happened?", inline=False)
+        embed.add_field(name="No. 9 Oof", value="Tragic backstory...", inline=False)
         await message.channel.send(embed=embed)
 
     if command == "seek": 
@@ -60,6 +61,5 @@ async def on_message(message):
         embed=discord.Embed(title="Quote:", description=quotes["quotes"][int(args[0])]["quote"], color=0x7301af)
         embed.set_footer(text="do ^seek for another! 🔥 ")
         await message.channel.send(embed = embed, file = file)
-
 
 client.run(TOKEN)
